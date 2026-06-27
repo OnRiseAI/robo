@@ -1,0 +1,85 @@
+{
+  "name": "Matter - Physical Product Landing Page | Shadcn Studio",
+  "short_name": "Matter",
+  "description": "Meet Robo, the intelligent home companion designed to simplify household chores with precision AI, smart automation, and sleek humanoid design.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "categories": [
+    "productivity",
+    "business",
+    "development",
+    "Robotics",
+    "AI"
+  ],
+  "icons": [
+    {
+      "src": "/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "Go to homepage",
+      "url": "/"
+    },
+    {
+      "name": "Schedule a Demo",
+      "short_name": "Schedule a Demo",
+      "description": "Schedule a demo with us",
+      "url": "/schedule-demo"
+    },
+    {
+      "name": "FAQs",
+      "short_name": "FAQs",
+      "description": "Find answers to common questions",
+      "url": "/faqs"
+    },
+    {
+      "name": "About Us",
+      "short_name": "About",
+      "description": "Learn more about us",
+      "url": "/about-us"
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read our blog",
+      "url": "/blog"
+    }
+  ]
+}
