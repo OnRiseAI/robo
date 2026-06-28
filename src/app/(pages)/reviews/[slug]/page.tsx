@@ -1,0 +1,136 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AffiliateButton } from '@/components/affiliate/affiliate-button'
+import { CompareTable } from '@/components/affiliate/compare-table'
+import { ProsCons } from '@/components/affiliate/pros-cons'
+import { RatingScore } from '@/components/affiliate/rating-score'
+import { getProductBySlug, products } from '@/assets/data/products'
+
+export function generateStaticParams() {
+  return products.map(product => ({ slug: product.slug }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
+
+  if (!product) return {}
+
+  return {
+    title: `${product.brand} ${product.model} Review | US Buyer Guide`,
+    description: product.summary
+  }
+}
+
+export const dynamicParams = false
+
+export default async function ReviewPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
+
+  if (!product) notFound()
+
+  const related = products.filter(item => item.category === product.category && item.slug !== product.slug).slice(0, 2)
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${product.brand} ${product.model}`,
+    brand: product.brand,
+    description: product.summary,
+    image: product.image,
+    offers: {
+      '@type': 'Offer',
+      price: product.price.current,
+      priceCurrency: product.price.currency,
+      availability: product.status === 'in-stock' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+      url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/reviews/${product.slug}`
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: product.rating?.overall,
+        bestRating: 10
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'Home Robot Guide'
+      }
+    }
+  }
+
+  return (
+    <>
+      <section className='px-4 py-16 sm:px-6 lg:px-8 lg:py-24'>
+        <div className='mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start'>
+          <div className='overflow-hidden rounded-2xl border'>
+            <img src={product.image} alt={`${product.brand} ${product.model}`} className='aspect-video w-full object-cover lg:aspect-square' />
+          </div>
+          <div className='space-y-8'>
+            <div className='space-y-4'>
+              <div className='flex flex-wrap gap-2'>
+                <Badge>{product.status.replaceAll('-', ' ')}</Badge>
+                <Badge variant='outline'>Price checked {product.price.lastChecked}</Badge>
+              </div>
+              <h1 className='text-4xl font-medium tracking-tight sm:text-5xl'>
+                {product.brand} {product.model} review
+              </h1>
+              <p className='text-muted-foreground text-lg'>{product.summary}</p>
+            </div>
+            <RatingScore score={product.rating?.overall} />
+            <div className='flex flex-wrap gap-3'>
+              {product.affiliateLinks.map(link => (
+                <AffiliateButton key={link.label} link={link} />
+              ))}
+            </div>
+            <p className='text-muted-foreground text-sm'>
+              This page is built for US affiliate review content. Replace placeholder links after program approval and refresh price, warranty, and availability before publication.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className='px-4 py-12 sm:px-6 lg:px-8'>
+        <div className='mx-auto max-w-7xl space-y-8'>
+          <ProsCons pros={product.pros} cons={product.cons} />
+          <Card>
+            <CardHeader>
+              <CardTitle>Specs that matter for US buyers</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <dl className='grid gap-4 sm:grid-cols-2'>
+                {Object.entries(product.keySpecs).map(([key, value]) => (
+                  <div key={key} className='rounded-lg border p-4'>
+                    <dt className='text-muted-foreground text-sm'>{key}</dt>
+                    <dd className='mt-1 font-medium'>{String(value)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </CardContent>
+          </Card>
+
+          {related.length > 0 && (
+            <div className='space-y-4'>
+              <h2 className='text-3xl font-medium tracking-tight'>Compare alternatives</h2>
+              <CompareTable products={[product, ...related]} />
+            </div>
+          )}
+
+          <div className='text-sm text-muted-foreground'>
+            Need the category context? Go back to{' '}
+            <Link href='/robot-vacuums' className='underline underline-offset-4'>
+              robot vacuum guides
+            </Link>
+            .
+          </div>
+        </div>
+      </section>
+      <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
+    </>
+  )
+}
