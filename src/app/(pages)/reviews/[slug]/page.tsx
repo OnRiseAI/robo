@@ -9,7 +9,9 @@ import { CompareTable } from '@/components/affiliate/compare-table'
 import { ProductVideo } from '@/components/affiliate/product-video'
 import { ProsCons } from '@/components/affiliate/pros-cons'
 import { RatingScore } from '@/components/affiliate/rating-score'
+import { ProductFaqBlock, SeoAnswerBox, buildProductFaqs } from '@/components/affiliate/seo-answer-blocks'
 import { getProductBySlug, products } from '@/assets/data/products'
+import { absoluteUrl, breadcrumbJsonLd, faqJsonLd, jsonLdGraph, productJsonLd, reviewJsonLd, webPageJsonLd } from '@/lib/seo'
 
 export function generateStaticParams() {
   return products.map(product => ({ slug: product.slug }))
@@ -22,8 +24,32 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!product) return {}
 
   return {
-    title: `${product.brand} ${product.model} Review | US Buyer Guide`,
-    description: product.summary
+    title: `${product.brand} ${product.model} Review: Availability, Price & Official Links`,
+    description: `Can you buy ${product.brand} ${product.model}? ${product.summary}`,
+    keywords: [
+      `${product.brand} ${product.model}`,
+      `${product.brand} ${product.model} price`,
+      `${product.brand} ${product.model} preorder`,
+      `${product.brand} ${product.model} review`,
+      'humanoid robot for sale',
+      'home humanoid robot'
+    ],
+    alternates: {
+      canonical: `/reviews/${product.slug}`
+    },
+    openGraph: {
+      title: `${product.brand} ${product.model} availability review`,
+      description: product.summary,
+      url: absoluteUrl(`/reviews/${product.slug}`),
+      type: 'article',
+      images: [{ url: product.image, alt: `${product.brand} ${product.model}` }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.brand} ${product.model} review`,
+      description: product.summary,
+      images: [product.image]
+    }
   }
 }
 
@@ -37,33 +63,23 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   const related = products.filter(item => item.category === product.category && item.slug !== product.slug).slice(0, 2)
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: `${product.brand} ${product.model}`,
-    brand: product.brand,
-    description: product.summary,
-    image: product.image,
-    offers: {
-      '@type': 'Offer',
-      price: product.price.current,
-      priceCurrency: product.price.currency,
-      availability: product.status === 'available' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
-      url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/reviews/${product.slug}`
-    },
-    review: {
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: product.rating?.overall,
-        bestRating: 10
-      },
-      author: {
-        '@type': 'Organization',
-        name: 'Home Robot Guide'
-      }
-    }
-  }
+  const faqs = buildProductFaqs(product)
+
+  const jsonLd = jsonLdGraph([
+    webPageJsonLd({
+      path: `/reviews/${product.slug}`,
+      name: `${product.brand} ${product.model} review`,
+      description: product.summary
+    }),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Humanoid robots for sale', path: '/humanoid-robots-for-sale' },
+      { name: `${product.brand} ${product.model}`, path: `/reviews/${product.slug}` }
+    ]),
+    productJsonLd(product),
+    reviewJsonLd(product),
+    faqJsonLd(faqs)
+  ])
 
   return (
     <>
@@ -98,6 +114,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
       <section className='px-4 py-12 sm:px-6 lg:px-8'>
         <div className='mx-auto max-w-7xl space-y-8'>
+          <SeoAnswerBox product={product} />
           <ProsCons pros={product.pros} cons={product.cons} />
           <ProductVideo product={product} />
           <Card>
@@ -134,6 +151,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               <CompareTable products={[product, ...related]} />
             </div>
           )}
+
+          <ProductFaqBlock product={product} />
 
           <div className='text-sm text-muted-foreground'>
             Need the category context? Go back to{' '}

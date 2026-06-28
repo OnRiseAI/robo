@@ -28,18 +28,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: '%s | Home Robot Guide',
-    default: 'Home Robot Guide | US Buyer Guides for Household Robots'
+    default: 'Home Robot Guide | Humanoid Robot Availability Tracker'
   },
   description:
-    'US buyer guides for home robots Americans can actually buy, with prices, availability, smart-home fit, privacy notes, warranties, and affiliate deal tracking.',
+    'US humanoid robot availability tracker with prices, preorder status, official links, videos, source notes, privacy cautions, and buyer guides.',
   robots: 'index,follow',
   keywords: [
-    'best robot vacuum',
-    'robot lawn mower',
-    'robotic pool cleaner',
-    'robot window cleaner',
+    'humanoid robots for sale',
+    'humanoid robot preorder',
     'home humanoid robot',
-    'home robots'
+    '1X NEO',
+    'Unitree G1',
+    'Tesla Optimus',
+    'Figure 03'
   ],
   icons: {
     icon: [
@@ -83,9 +84,9 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
   openGraph: {
-    title: 'Home Robot Guide | US Buyer Guides for Household Robots',
+    title: 'Home Robot Guide | Humanoid Robot Availability Tracker',
     description:
-      'Compare home robots by US availability, price, smart-home fit, privacy, warranty, and deal timing.',
+      'Compare humanoid robots by US availability, preorder status, price, official links, videos, source notes, and buyer risk.',
     type: 'website',
     siteName: 'Home Robot Guide',
     url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
@@ -101,8 +102,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Home Robot Guide | US Buyer Guides for Household Robots',
-    description: 'US buyer guides for home robots Americans can actually buy.'
+    title: 'Home Robot Guide | Humanoid Robot Availability Tracker',
+    description: 'US humanoid robot tracker for preorders, prices, official links, and buyer cautions.'
   }
 }
 

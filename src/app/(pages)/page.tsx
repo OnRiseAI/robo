@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowUpRightIcon } from 'lucide-react'
 
@@ -9,26 +10,67 @@ import { ProductCard } from '@/components/affiliate/product-card'
 import { getPosts } from '@/lib/posts'
 import { getHumanoidProducts } from '@/assets/data/products'
 import { categoryPages } from '@/assets/data/affiliate-pages'
+import { faqJsonLd, jsonLdGraph, productJsonLd, webPageJsonLd } from '@/lib/seo'
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}#website`,
-      name: 'Home Robot Guide',
-      description:
-        'US buyer guides for home robots Americans can actually buy, with prices, availability, smart-home fit, privacy notes, warranties, and affiliate deal tracking.',
-      url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
-      inLanguage: 'en-US'
-    }
-  ]
+export const metadata: Metadata = {
+  title: 'Humanoid Robots for Sale: US Availability, Preorders & Prices',
+  description:
+    'A hype-checked humanoid robot availability tracker for US buyers comparing 1X NEO, Unitree G1, Unitree R1, Figure 03, Tesla Optimus, Apollo, and Digit.',
+  keywords: ['humanoid robots for sale', 'home humanoid robot', '1X NEO preorder', 'Unitree G1 price', 'Tesla Optimus for sale', 'Figure 03 robot'],
+  alternates: {
+    canonical: '/'
+  }
 }
+
+const faqs = [
+  {
+    question: 'Can you buy a humanoid robot for home use today?',
+    answer:
+      'There is only one clear home-focused humanoid preorder to track first: 1X NEO. Unitree G1 and R1 are more buyable as developer/early-adopter platforms than finished home assistants.'
+  },
+  {
+    question: 'What does this site verify?',
+    answer:
+      'Home Robot Guide verifies official order pages, preorder claims, prices, source videos, buyer type, US availability, warranty notes, and whether a robot is actually consumer buyable.'
+  },
+  {
+    question: 'Why include robots that are not for sale?',
+    answer:
+      'People search for Tesla Optimus, Figure 03, Apollo, and Digit before they are consumer products. We include them to answer availability questions clearly and point buyers toward actual order/preorder options.'
+  }
+]
 
 const Home = async () => {
   const posts = await getPosts()
   const featuredPosts = posts.filter(post => post.featured)
   const featuredProducts = getHumanoidProducts().slice(0, 3)
+
+  const jsonLd = jsonLdGraph([
+    {
+      '@type': 'WebSite',
+      '@id': '#website',
+      name: 'Home Robot Guide',
+      description: metadata.description as string,
+      url: '/',
+      inLanguage: 'en-US',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: '/humanoid-robots-for-sale?q={search_term_string}',
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    webPageJsonLd({ path: '/', name: metadata.title as string, description: metadata.description as string }),
+    {
+      '@type': 'ItemList',
+      name: 'Top humanoid robots to track first',
+      itemListElement: featuredProducts.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: productJsonLd(product)
+      }))
+    },
+    faqJsonLd(faqs)
+  ])
 
   return (
     <>
@@ -60,6 +102,26 @@ const Home = async () => {
             </div>
           </div>
           <HumanoidHeroVisual />
+        </div>
+      </section>
+
+      <section className='px-4 pb-12 sm:px-6 lg:px-8'>
+        <div className='mx-auto grid max-w-7xl gap-4 md:grid-cols-3'>
+          <div className='rounded-2xl border bg-muted/30 p-5'>
+            <p className='text-muted-foreground text-sm'>Short answer</p>
+            <h2 className='mt-2 text-xl font-medium'>Only a few humanoids are truly orderable</h2>
+            <p className='text-muted-foreground mt-2 text-sm'>1X NEO is the clearest home-focused preorder. Unitree G1/R1 are developer-focused. Figure, Tesla, Apollo, and Digit are tracking pages, not normal consumer checkouts.</p>
+          </div>
+          <div className='rounded-2xl border bg-muted/30 p-5'>
+            <p className='text-muted-foreground text-sm'>AEO promise</p>
+            <h2 className='mt-2 text-xl font-medium'>Answer-first pages</h2>
+            <p className='text-muted-foreground mt-2 text-sm'>Each robot page answers whether you can buy it, how much it costs, whether it is for homes, and what to verify before ordering.</p>
+          </div>
+          <div className='rounded-2xl border bg-muted/30 p-5'>
+            <p className='text-muted-foreground text-sm'>Freshness signal</p>
+            <h2 className='mt-2 text-xl font-medium'>Official source tracking</h2>
+            <p className='text-muted-foreground mt-2 text-sm'>Product pages include official links, videos, last-checked dates, source notes, and status labels for search engines and AI answer engines.</p>
+          </div>
         </div>
       </section>
 
