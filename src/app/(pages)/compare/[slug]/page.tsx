@@ -7,20 +7,25 @@ import { CompareTable } from '@/components/affiliate/compare-table'
 import { products } from '@/assets/data/products'
 
 const comparePages: Record<string, { title: string; description: string; productSlugs: string[] }> = {
-  'roborock-vs-dreame': {
-    title: 'Roborock vs Dreame: Which Robot Vacuum Should US Buyers Choose?',
-    description: 'Compare Roborock and Dreame by price, dock automation, navigation, smart-home support, privacy, warranty, and affiliate availability.',
-    productSlugs: ['roborock-saros-10r', 'dreame-x50-ultra']
+  '1x-neo-vs-unitree-g1': {
+    title: '1X NEO vs Unitree G1: Home Humanoid or Developer Platform?',
+    description: 'Compare the clearest home humanoid preorder against one of the most buyable developer humanoids by price, availability, use case, and buyer risk.',
+    productSlugs: ['1x-neo', 'unitree-g1']
   },
-  'roborock-vs-narwal': {
-    title: 'Roborock vs Narwal: Premium Robot Vacuum Comparison',
-    description: 'Compare Roborock and Narwal for mopping, automation, app experience, price, and US buying options.',
-    productSlugs: ['roborock-saros-10r', 'narwal-freo-z-ultra']
+  '1x-neo-vs-figure-03': {
+    title: '1X NEO vs Figure 03: Which Home Humanoid Is Actually Orderable?',
+    description: 'Compare 1X NEO and Figure 03 by home positioning, consumer order path, official videos, pricing visibility, and delivery claims.',
+    productSlugs: ['1x-neo', 'figure-03']
   },
-  'aiper-vs-beatbot': {
-    title: 'Aiper vs Beatbot: Cordless Pool Robot Buying Guide',
-    description: 'Compare pool robot positioning, battery concerns, warranty notes, and US affiliate opportunities.',
-    productSlugs: ['beatbot-aquasense-2']
+  'tesla-optimus-vs-figure-03': {
+    title: 'Tesla Optimus vs Figure 03: Can You Buy Either One?',
+    description: 'A hype-checked comparison for buyers asking whether Tesla Optimus or Figure 03 is actually available as a home robot.',
+    productSlugs: ['tesla-optimus', 'figure-03']
+  },
+  'unitree-g1-vs-unitree-r1': {
+    title: 'Unitree G1 vs Unitree R1: Which Affordable Humanoid Should You Track?',
+    description: 'Compare Unitree humanoid options by price, availability, developer expectations, and home-readiness cautions.',
+    productSlugs: ['unitree-g1', 'unitree-r1']
   }
 }
 
@@ -56,13 +61,15 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
     <section className='px-4 py-16 sm:px-6 lg:px-8 lg:py-24'>
       <div className='mx-auto max-w-7xl space-y-10'>
         <div className='max-w-3xl space-y-4'>
-          <Badge variant='outline'>Comparison</Badge>
+          <Badge variant='outline'>Humanoid comparison</Badge>
           <h1 className='text-4xl font-medium tracking-tight sm:text-5xl'>{page.title}</h1>
           <p className='text-muted-foreground text-lg'>{page.description}</p>
         </div>
         <CompareTable products={pageProducts} />
         <div className='grid gap-6 md:grid-cols-2'>
-          {pageProducts.map(product => product && <ProductCard key={product.slug} product={product} />)}
+          {pageProducts.map(product => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
         </div>
       </div>
     </section>

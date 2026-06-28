@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AffiliateButton } from '@/components/affiliate/affiliate-button'
 import { CompareTable } from '@/components/affiliate/compare-table'
+import { ProductVideo } from '@/components/affiliate/product-video'
 import { ProsCons } from '@/components/affiliate/pros-cons'
 import { RatingScore } from '@/components/affiliate/rating-score'
 import { getProductBySlug, products } from '@/assets/data/products'
@@ -47,7 +48,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       '@type': 'Offer',
       price: product.price.current,
       priceCurrency: product.price.currency,
-      availability: product.status === 'in-stock' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+      availability: product.status === 'available' ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
       url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/reviews/${product.slug}`
     },
     review: {
@@ -98,6 +99,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
       <section className='px-4 py-12 sm:px-6 lg:px-8'>
         <div className='mx-auto max-w-7xl space-y-8'>
           <ProsCons pros={product.pros} cons={product.cons} />
+          <ProductVideo product={product} />
           <Card>
             <CardHeader>
               <CardTitle>Specs that matter for US buyers</CardTitle>
@@ -113,6 +115,18 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
               </dl>
             </CardContent>
           </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Source notes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className='space-y-3 text-sm text-muted-foreground'>
+                {product.sourceNotes.map(note => (
+                  <li key={note}>• {note}</li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
 
           {related.length > 0 && (
             <div className='space-y-4'>
@@ -123,8 +137,8 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
           <div className='text-sm text-muted-foreground'>
             Need the category context? Go back to{' '}
-            <Link href='/robot-vacuums' className='underline underline-offset-4'>
-              robot vacuum guides
+            <Link href='/home-humanoids' className='underline underline-offset-4'>
+              the humanoid robot tracker
             </Link>
             .
           </div>

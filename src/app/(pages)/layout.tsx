@@ -7,24 +7,24 @@ import { AffiliateDisclosureBanner } from '@/components/affiliate/disclosure-ban
 
 const navigationData: Navigation[] = [
   {
-    title: 'Robot Vacuums',
-    href: '/robot-vacuums'
-  },
-  {
-    title: 'Lawn Mowers',
-    href: '/robot-lawn-mowers'
-  },
-  {
-    title: 'Pool Cleaners',
-    href: '/robot-pool-cleaners'
-  },
-  {
     title: 'Humanoids',
     href: '/home-humanoids'
   },
   {
-    title: 'Deals',
-    href: '/deals'
+    title: 'For Sale',
+    href: '/humanoid-robots-for-sale'
+  },
+  {
+    title: 'Preorders',
+    href: '/preorder-tracker'
+  },
+  {
+    title: '1X vs Unitree',
+    href: '/compare/1x-neo-vs-unitree-g1'
+  },
+  {
+    title: 'Best',
+    href: '/best/best-home-humanoid-robots'
   },
   {
     title: 'Blog',

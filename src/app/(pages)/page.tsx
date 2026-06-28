@@ -7,7 +7,7 @@ import { MatterButton } from '@/components/ui/matter-button'
 import { HumanoidHeroVisual } from '@/components/affiliate/humanoid-hero-visual'
 import { ProductCard } from '@/components/affiliate/product-card'
 import { getPosts } from '@/lib/posts'
-import { products } from '@/assets/data/products'
+import { getHumanoidProducts } from '@/assets/data/products'
 import { categoryPages } from '@/assets/data/affiliate-pages'
 
 const jsonLd = {
@@ -28,7 +28,7 @@ const jsonLd = {
 const Home = async () => {
   const posts = await getPosts()
   const featuredPosts = posts.filter(post => post.featured)
-  const featuredProducts = products.slice(0, 3)
+  const featuredProducts = getHumanoidProducts().slice(0, 3)
 
   return (
     <>
@@ -88,7 +88,7 @@ const Home = async () => {
         <div className='mx-auto max-w-7xl space-y-8'>
           <div>
             <Badge variant='outline'>First money pages</Badge>
-            <h2 className='mt-3 text-3xl font-medium tracking-tight sm:text-4xl'>Featured robot vacuum picks</h2>
+            <h2 className='mt-3 text-3xl font-medium tracking-tight sm:text-4xl'>Humanoid robots to track first</h2>
           </div>
           <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
             {featuredProducts.map((product, index) => (

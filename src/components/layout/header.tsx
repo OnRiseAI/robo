@@ -66,8 +66,8 @@ const Header = ({ navigationData, className }: HeaderProps) => {
             <div className='flex items-center gap-2'>
               <ModeToggle />
               <MatterButton className='max-sm:hidden' asChild>
-                <Link href='/deals'>
-                  Robot deals
+                <Link href='/preorder-tracker'>
+                  Preorder tracker
                   <ArrowUpRightIcon />
                 </Link>
               </MatterButton>
@@ -76,13 +76,13 @@ const Header = ({ navigationData, className }: HeaderProps) => {
             <Tooltip>
               <TooltipTrigger className='sm:hidden' asChild>
                 <MatterButton asChild className='size-12 sm:hidden [&>a]:size-10 [&>a]:px-0'>
-                  <Link href='/deals'>
+                  <Link href='/preorder-tracker'>
                     <ArrowUpRightIcon />
-                    <span className='sr-only'>Robot deals</span>
+                    <span className='sr-only'>Preorder tracker</span>
                   </Link>
                 </MatterButton>
               </TooltipTrigger>
-              <TooltipContent>Robot deals</TooltipContent>
+              <TooltipContent>Preorder tracker</TooltipContent>
             </Tooltip>
 
             <HeaderNavigationSmallScreen

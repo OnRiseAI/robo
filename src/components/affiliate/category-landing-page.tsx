@@ -6,11 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MatterButton } from '@/components/ui/matter-button'
 import { ProductCard } from '@/components/affiliate/product-card'
 import { CompareTable } from '@/components/affiliate/compare-table'
-import { getProductsByCategory, type ProductCategory } from '@/assets/data/products'
+import { getHumanoidProducts, getProductsByCategory, type ProductCategory } from '@/assets/data/products'
 import type { CategoryPage } from '@/assets/data/affiliate-pages'
 
 export function CategoryLandingPage({ page }: { page: CategoryPage }) {
-  const products = getProductsByCategory(page.category as ProductCategory)
+  const products = page.category === 'home-humanoid' ? getHumanoidProducts() : getProductsByCategory(page.category as ProductCategory)
 
   const trustCards: { title: string; body: string; Icon: LucideIcon }[] = [
     {
