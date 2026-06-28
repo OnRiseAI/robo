@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { ArrowUpRightIcon, ShieldCheckIcon, TagIcon, WifiIcon, type LucideIcon } from 'lucide-react'
+import { ArrowUpRightIcon } from 'lucide-react'
 
 import BlogCarousel from '@/components/blocks/blog-component/blog-component'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MatterButton } from '@/components/ui/matter-button'
+import { HumanoidHeroVisual } from '@/components/affiliate/humanoid-hero-visual'
 import { ProductCard } from '@/components/affiliate/product-card'
 import { getPosts } from '@/lib/posts'
 import { products } from '@/assets/data/products'
@@ -30,66 +30,36 @@ const Home = async () => {
   const featuredPosts = posts.filter(post => post.featured)
   const featuredProducts = products.slice(0, 3)
 
-  const trustCards: { title: string; body: string; Icon: LucideIcon }[] = [
-    {
-      title: 'US availability first',
-      body: 'We label in-stock, preorder, and not-yet-shipping robots so hype does not turn into fake purchase advice.',
-      Icon: ShieldCheckIcon
-    },
-    {
-      title: 'Smart-home fit',
-      body: 'Every product can be scored for Alexa, Google Home, Apple Home, Matter, Home Assistant, and app dependence.',
-      Icon: WifiIcon
-    },
-    {
-      title: 'Affiliate-ready CTAs',
-      body: 'Amazon and brand-direct buttons include inline disclosure and sponsored nofollow attributes.',
-      Icon: TagIcon
-    }
-  ]
-
   return (
     <>
       <section id='home' className='px-4 py-16 sm:px-6 lg:px-8 lg:py-28'>
         <div className='mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center'>
           <div className='space-y-8'>
             <div className='space-y-4'>
-              <Badge variant='outline'>US household robot buyer guide</Badge>
+              <Badge variant='outline'>US home humanoid robot tracker</Badge>
               <h1 className='max-w-4xl text-5xl font-medium tracking-tight sm:text-6xl lg:text-7xl'>
-                Home robots Americans can actually buy
+                Humanoid robots for the home, tracked by what is actually available
               </h1>
               <p className='text-muted-foreground max-w-2xl text-lg'>
-                Compare robot vacuums, lawn mowers, pool cleaners, window cleaners, and home humanoids by price, US availability, smart-home fit, privacy, warranty, and deal timing.
+                Compare 1X NEO, Unitree, Figure, Tesla Optimus, and other humanoid robots by price, preorder status, US delivery claims, real household capability, privacy, and whether you can actually buy them.
               </p>
             </div>
             <div className='flex flex-wrap gap-3'>
               <MatterButton asChild>
-                <Link href='/robot-vacuums'>
-                  Start with robot vacuums
+                <Link href='/home-humanoids'>
+                  View humanoid tracker
                   <ArrowUpRightIcon />
                 </Link>
               </MatterButton>
               <MatterButton asChild>
-                <Link href='/deals'>
-                  View robot deals
-                  <TagIcon />
+                <Link href='/reviews/1x-neo'>
+                  Track 1X NEO
+                  <ArrowUpRightIcon />
                 </Link>
               </MatterButton>
             </div>
           </div>
-          <div className='grid gap-4'>
-            {trustCards.map(({ title, body, Icon }) => (
-              <Card key={title}>
-                <CardHeader>
-                  <Icon className='size-5 text-primary' />
-                  <CardTitle>{title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className='text-muted-foreground text-sm'>{body}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <HumanoidHeroVisual />
         </div>
       </section>
 
