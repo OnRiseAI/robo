@@ -9,7 +9,6 @@ import { HumanoidHeroVisual } from '@/components/affiliate/humanoid-hero-visual'
 import { ProductCard } from '@/components/affiliate/product-card'
 import { getPosts } from '@/lib/posts'
 import { getHumanoidProducts } from '@/assets/data/products'
-import { categoryPages } from '@/assets/data/affiliate-pages'
 import { faqJsonLd, jsonLdGraph, productJsonLd, webPageJsonLd } from '@/lib/seo'
 
 export const metadata: Metadata = {
@@ -37,6 +36,33 @@ const faqs = [
     question: 'Why include robots that are not for sale?',
     answer:
       'People search for Tesla Optimus, Figure 03, Apollo, and Digit before they are consumer products. We include them to answer availability questions clearly and point buyers toward actual order/preorder options.'
+  }
+]
+
+const trackingRoutes = [
+  {
+    href: '/humanoid-robots-for-sale',
+    label: 'Availability tracker',
+    title: 'Humanoid robots for sale',
+    description: 'A buyer-first status table separating orderable, preorder, developer-only, enterprise-only, and not-for-sale humanoids.'
+  },
+  {
+    href: '/preorder-tracker',
+    label: 'Preorder watchlist',
+    title: 'Preorder tracker',
+    description: 'Follow deposits, stated US delivery windows, official source links, and what needs re-checking before a buyer commits.'
+  },
+  {
+    href: '/home-humanoids',
+    label: 'Home-use guide',
+    title: 'Home humanoid robots',
+    description: 'Focus on real household readiness: chores, privacy, support, warranty, remote help, and whether normal consumers can order.'
+  },
+  {
+    href: '/best/best-home-humanoid-robots',
+    label: 'Best-of page',
+    title: 'Best home humanoid robots',
+    description: 'A conservative ranking that favors verified availability and home positioning over speculative demos.'
   }
 ]
 
@@ -129,17 +155,17 @@ const Home = async () => {
         <div className='mx-auto max-w-7xl space-y-8'>
           <div className='flex flex-col justify-between gap-4 sm:flex-row sm:items-end'>
             <div>
-              <Badge variant='outline'>Category hubs</Badge>
-              <h2 className='mt-3 text-3xl font-medium tracking-tight sm:text-4xl'>Build authority across household robotics</h2>
+              <Badge variant='outline'>Tracking hubs</Badge>
+              <h2 className='mt-3 text-3xl font-medium tracking-tight sm:text-4xl'>Own the home humanoid decision path</h2>
             </div>
-            <p className='text-muted-foreground max-w-xl text-sm'>Start broad enough for topical authority, then monetize high-intent review, best-of, comparison, and deal pages.</p>
+            <p className='text-muted-foreground max-w-xl text-sm'>The site should win by answering what people can actually buy, preorder, compare, or ignore — not by drifting into mature appliance affiliate pages.</p>
           </div>
-          <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-5'>
-            {categoryPages.map(page => (
-              <Link key={page.slug} href={`/${page.slug}`} className='group rounded-xl border p-5 transition-colors hover:bg-muted/40'>
-                <Badge variant='outline'>{page.primaryKeyword}</Badge>
-                <h3 className='mt-4 text-xl font-medium group-hover:underline'>{page.title}</h3>
-                <p className='text-muted-foreground mt-3 line-clamp-3 text-sm'>{page.description}</p>
+          <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
+            {trackingRoutes.map(route => (
+              <Link key={route.href} href={route.href} className='group rounded-xl border p-5 transition-colors hover:bg-muted/40'>
+                <Badge variant='outline'>{route.label}</Badge>
+                <h3 className='mt-4 text-xl font-medium group-hover:underline'>{route.title}</h3>
+                <p className='text-muted-foreground mt-3 line-clamp-3 text-sm'>{route.description}</p>
               </Link>
             ))}
           </div>

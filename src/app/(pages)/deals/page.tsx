@@ -6,8 +6,8 @@ import { ProductCard } from '@/components/affiliate/product-card'
 import { products } from '@/assets/data/products'
 
 export const metadata: Metadata = {
-  title: 'Home Robot Deals | US Price Tracker',
-  description: 'Track US deals on robot vacuums, robot lawn mowers, robotic pool cleaners, window cleaners, and home humanoids.'
+  title: 'Humanoid Robot Prices & Preorder Watchlist',
+  description: 'Track humanoid robot prices, preorder deposits, official links, and last-checked availability for US buyers.'
 }
 
 export default function DealsPage() {
@@ -15,14 +15,15 @@ export default function DealsPage() {
     <section className='px-4 py-16 sm:px-6 lg:px-8 lg:py-24'>
       <div className='mx-auto max-w-7xl space-y-10'>
         <div className='max-w-3xl space-y-4'>
-          <Badge variant='outline'>Deals hub</Badge>
-          <h1 className='text-4xl font-medium tracking-tight sm:text-5xl'>Home robot deals, checked for US buyers</h1>
+          <Badge variant='outline'>Price watchlist</Badge>
+          <h1 className='text-4xl font-medium tracking-tight sm:text-5xl'>Humanoid robot prices, deposits, and preorder paths</h1>
           <p className='text-muted-foreground text-lg'>
-            This page is ready for live Amazon and brand-direct pricing. For now it uses the first product data set with last-checked dates so we can wire affiliate programs safely.
+            This page tracks official humanoid robot pricing signals, preorder deposits, source links, and last-checked dates. It is not a generic robot-appliance deals page.
           </p>
           <p className='text-muted-foreground text-sm'>
-            Next major US deal cycle: Black Friday 2026 on Nov 27 and Cyber Monday 2026 on Nov 30. See the full category hubs starting with{' '}
-            <Link href='/robot-vacuums' className='underline underline-offset-4'>robot vacuums</Link>.
+            Start with the{' '}
+            <Link href='/humanoid-robots-for-sale' className='underline underline-offset-4'>humanoid robots for sale tracker</Link>{' '}
+            to see which products are actually orderable, preorder-only, developer-focused, enterprise-only, or not for sale.
           </p>
         </div>
         <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>

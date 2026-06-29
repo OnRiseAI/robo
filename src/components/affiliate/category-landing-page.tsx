@@ -14,18 +14,18 @@ export function CategoryLandingPage({ page }: { page: CategoryPage }) {
 
   const trustCards: { title: string; body: string; Icon: LucideIcon }[] = [
     {
-      title: 'US availability checked',
-      body: 'We label in-stock, preorder, limited, and not-US-available robots before making purchase claims.',
+      title: 'Official sources first',
+      body: 'We cite order pages, source videos, deposits, warranty notes, and last-checked dates before making availability claims.',
       Icon: ShieldCheckIcon
     },
     {
-      title: 'Affiliate ready',
-      body: 'Pages support Amazon and brand-direct CTAs with sponsored nofollow attributes and inline disclosure.',
+      title: 'Status before hype',
+      body: 'Each robot is labeled as available, preorder, developer-only, enterprise-only, not-for-sale, or unverified so buyers do not mistake demos for products.',
       Icon: TagIcon
     },
     {
-      title: 'Smart-home fit',
-      body: 'Robots are compared across Alexa, Google Home, Apple Home, Matter, and privacy-sensitive features.',
+      title: 'Home readiness scored',
+      body: 'Humanoids are compared on household usefulness, manipulation, autonomy, privacy, support, and whether a normal US buyer can order.',
       Icon: SparklesIcon
     }
   ]
@@ -79,7 +79,7 @@ export function CategoryLandingPage({ page }: { page: CategoryPage }) {
               <Badge variant='outline'>Top picks</Badge>
               <h2 className='mt-3 text-3xl font-medium tracking-tight sm:text-4xl'>Recommended products</h2>
             </div>
-            <p className='text-muted-foreground max-w-xl text-sm'>Prices and availability use sample data for the first build sprint. Replace placeholder affiliate URLs after program approvals.</p>
+            <p className='text-muted-foreground max-w-xl text-sm'>This tracker uses official source data and conservative status labels. Prices, deposits, warranty, and availability should be re-checked before any purchase decision.</p>
           </div>
           <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
             {products.map((product, index) => (

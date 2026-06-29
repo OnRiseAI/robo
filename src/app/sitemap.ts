@@ -8,10 +8,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const routes = [
     '',
-    '/robot-vacuums',
-    '/robot-lawn-mowers',
-    '/robot-pool-cleaners',
-    '/robot-window-cleaners',
     '/home-humanoids',
     '/humanoid-robots-for-sale',
     '/preorder-tracker',
