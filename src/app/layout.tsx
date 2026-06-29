@@ -27,19 +27,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: 'Demo: %s - Matter | Shadcn Studio',
-    default: 'Demo: Matter - Physical Product Landing Page | Shadcn Studio'
+    template: '%s | Home Robot Guide',
+    default: 'Home Robot Guide | Humanoid Robot Availability Tracker'
   },
   description:
-    'Meet Robo, the intelligent home companion designed to simplify household chores with precision AI, smart automation, and sleek humanoid design.',
+    'US humanoid robot availability tracker with prices, preorder status, official links, videos, source notes, privacy cautions, and buyer guides.',
   robots: 'index,follow',
   keywords: [
-    'intelligent home robot',
-    'smart home robot',
-    'humanoid home companion',
-    'household robot',
-    'personal home robot',
-    'robot'
+    'humanoid robots for sale',
+    'humanoid robot preorder',
+    'home humanoid robot',
+    '1X NEO',
+    'Unitree G1',
+    'Tesla Optimus',
+    'Figure 03'
   ],
   icons: {
     icon: [
@@ -83,14 +84,11 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
   openGraph: {
-    title: {
-      template: 'Demo: %s - Matter | Shadcn Studio',
-      default: 'Demo: Matter - Physical Product Landing Page | Shadcn Studio'
-    },
+    title: 'Home Robot Guide | Humanoid Robot Availability Tracker',
     description:
-      'Meet Robo, the intelligent home companion designed to simplify household chores with precision AI, smart automation, and sleek humanoid design.',
+      'Compare humanoid robots by US availability, preorder status, price, official links, videos, source notes, and buyer risk.',
     type: 'website',
-    siteName: 'Matter',
+    siteName: 'Home Robot Guide',
     url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
     images: [
       {
@@ -98,18 +96,14 @@ export const metadata: Metadata = {
         type: 'image/png',
         width: 1200,
         height: 630,
-        alt: 'Matter - Physical Product Landing Page'
+        alt: 'Home Robot Guide'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: {
-      template: 'Demo: %s - Matter | Shadcn Studio',
-      default: 'Demo: Matter - Physical Product Landing Page | Shadcn Studio'
-    },
-    description:
-      'Meet Robo, the intelligent home companion designed to simplify household chores with precision AI, smart automation, and sleek humanoid design.'
+    title: 'Home Robot Guide | Humanoid Robot Availability Tracker',
+    description: 'US humanoid robot tracker for preorders, prices, official links, and buyer cautions.'
   }
 }
 

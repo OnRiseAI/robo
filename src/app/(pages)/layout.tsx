@@ -3,23 +3,28 @@ import type { ReactNode } from 'react'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import type { Navigation } from '@/components/layout/header-navigation'
+import { AffiliateDisclosureBanner } from '@/components/affiliate/disclosure-banner'
 
 const navigationData: Navigation[] = [
   {
-    title: 'Features',
-    href: '/#features'
+    title: 'Humanoids',
+    href: '/home-humanoids'
   },
   {
-    title: 'Use Cases',
-    href: '/#use-cases'
+    title: 'For Sale',
+    href: '/humanoid-robots-for-sale'
   },
   {
-    title: 'About Us',
-    href: '/about-us'
+    title: 'Preorders',
+    href: '/preorder-tracker'
   },
   {
-    title: 'FAQs',
-    href: '/faqs'
+    title: '1X vs Unitree',
+    href: '/compare/1x-neo-vs-unitree-g1'
+  },
+  {
+    title: 'Best',
+    href: '/best/best-home-humanoid-robots'
   },
   {
     title: 'Blog',
@@ -30,13 +35,9 @@ const navigationData: Navigation[] = [
 const PagesLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <div className='flex flex-col'>
-      {/* Header Section */}
+      <AffiliateDisclosureBanner />
       <Header navigationData={navigationData} />
-
-      {/* Main Content */}
       <main className='flex flex-col overflow-x-clip *:scroll-mt-24'>{children}</main>
-
-      {/* Footer Section */}
       <Footer />
     </div>
   )
